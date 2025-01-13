@@ -1,7 +1,8 @@
 # tests/test_model.py
 import pytest
-from exe_project.model import MyAwesomeModel
 import torch
+
+from exe_project.model import MyAwesomeModel
 
 
 # def test_error_on_wrong_shape():
