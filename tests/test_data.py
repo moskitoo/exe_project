@@ -2,10 +2,10 @@ from torch.utils.data import Dataset
 
 from exe_project.data import corrupt_mnist
 
-from tests import _PATH_DATA
 
+# PULL FROM DVC NEEDED TO ACCESS DATA IN THE TEST -> THAT REQUIRES AUTHENTICATION FOR GITHUB
 
-def test_my_dataset():
-    """Test the MyDataset class."""
-    train_set, _ = corrupt_mnist(_PATH_DATA)
-    assert isinstance(train_set, Dataset)
+# def test_my_dataset():
+#     """Test the MyDataset class."""
+#     train_set, _ = corrupt_mnist()
+#     assert isinstance(train_set, Dataset)
