@@ -3,7 +3,8 @@ import torch
 import typer
 from model import MyAwesomeModel
 
-from data import corrupt_mnist
+# from data import corrupt_mnist
+from data import MnistDataset
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
@@ -14,7 +15,8 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 10) -> None:
     print(f"{lr=}, {batch_size=}, {epochs=}")
 
     model = MyAwesomeModel().to(DEVICE)
-    train_set, _ = corrupt_mnist()
+    # train_set, _ = corrupt_mnist()
+    train_set = MnistDataset(data_folder="data/raw")
 
     train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size)
 

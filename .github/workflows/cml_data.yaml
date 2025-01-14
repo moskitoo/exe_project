@@ -1,10 +1,12 @@
-name: "Run tests"
+name: DVC Workflow
 
 on:
-  push:
-    branches: [ master, main ]
   pull_request:
-    branches: [ master, main ]
+    branches:
+    - main
+    paths:
+    - '**/*.dvc'
+    - '.dvc/**'
 
 jobs:
   build:
@@ -29,28 +31,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
+    # - uses: iterative/setup-dvc@v1
+  # - name: Get data
+  #   run: dvc pull
+  #   env:
+  #     GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
     - name: Install exe_project
       run: pip install .
-  test:
     - name: Test with pytest
       run: |
         pytest -v
-  gcp_docker:
-    needs: test
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Auth with GCP
-      uses: google-github-actions/auth@v2
-      with:
-        credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
-
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2
-
-    - name: Submit build
-      run: gcloud builds submit --config cloudbuild_containers.yaml
-
