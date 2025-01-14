@@ -7,3 +7,5 @@ scikit_learn==1.6.1
 torch==2.5.1
 typer==0.15.1
 pre-commit
+dvc
+dvc-gs
