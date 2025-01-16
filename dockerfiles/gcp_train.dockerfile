@@ -25,4 +25,4 @@ RUN dvc config core.no_scm true
 # RUN dvc pull
 
 # ENTRYPOINT ["python", "-u", "src/exe_project/train.py"]
-ENTRYPOINT ["dvc", "pull"]
+# ENTRYPOINT ["dvc", "pull"]
