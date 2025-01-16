@@ -5,6 +5,10 @@ RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
+# Copy GCP credentials
+COPY gcp_auth/ gcp_auth/
+ENV GOOGLE_APPLICATION_CREDENTIALS=gcp_auth/dtumlops-447720-a5add0f7744a.json
+
 COPY src src/
 COPY requirements.txt requirements.txt
 COPY requirements_dev.txt requirements_dev.txt

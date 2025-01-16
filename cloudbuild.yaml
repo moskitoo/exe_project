@@ -5,15 +5,15 @@ steps:
     'build',
     '.',
     '-t',
-    'europe-west1-docker.pkg.dev/$PROJECT_ID/my-container-registry/dvc_container',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/my-container-registry/train_dvc_container',
     '-f',
-    'dockerfiles/dvc.dockerfile'
+    'dockerfiles/train.dockerfile'
   ]
 - name: 'gcr.io/cloud-builders/docker'
   id: 'Push container image'
   args: [
     'push',
-    'europe-west1-docker.pkg.dev/$PROJECT_ID/my-container-registry/dvc_container'
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/my-container-registry/train_dvc_container'
   ]
 options:
   logging: CLOUD_LOGGING_ONLY
