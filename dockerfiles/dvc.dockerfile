@@ -9,8 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     libffi-dev \
     libssl-dev \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
+# Copy GCP credentials
 COPY gcp_auth/ gcp_auth/
 ENV GOOGLE_APPLICATION_CREDENTIALS=gcp_auth/dtumlops-447720-a5add0f7744a.json
 
@@ -21,6 +23,7 @@ RUN pip install --no-cache-dir \
     google-auth-oauthlib \
     google-cloud-storage
 
+# Initialize DVC and pull data
 RUN dvc init --no-scm
 COPY .dvc/config .dvc/config
 COPY *.dvc .dvc/
