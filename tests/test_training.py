@@ -6,7 +6,6 @@ import torch
 from omegaconf import DictConfig, OmegaConf
 from sklearn.metrics import RocCurveDisplay, accuracy_score, f1_score, precision_score, recall_score
 
-from exe_project.data import corrupt_mnist
 from exe_project.model import MyAwesomeModel
 
 # from exe_project.src.exe_project import train
