@@ -8,12 +8,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        # os: ["ubuntu-latest", "windows-latest", "macos-latest"]
         os: ["ubuntu-latest"]
 
     steps:
@@ -22,22 +20,21 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.12.5
-        cache: 'pip'
+        python-version: "3.12.5"
+        cache: 'pip'  
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_tests.txt
     - name: Install exe_project
       run: pip install .
-  test:
     - name: Test with pytest
       run: |
         pytest -v
+
   gcp_docker:
-    needs: test
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: build
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -53,4 +50,3 @@ jobs:
 
     - name: Submit build
       run: gcloud builds submit --config cloudbuild.yaml
-
