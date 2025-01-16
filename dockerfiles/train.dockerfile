@@ -16,7 +16,7 @@ RUN pip install . --no-deps --no-cache-dir --verbose
 
 RUN dvc init --no-scm
 COPY .dvc/config .dvc/config
-COPY *.dvc .dvc/
+COPY *.dvc ./
 RUN dvc config core.no_scm true
 RUN dvc pull
 
