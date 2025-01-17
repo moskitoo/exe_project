@@ -3,4 +3,4 @@ workerPoolSpecs:
         machineType: n1-highmem-2
     replicaCount: 1
     containerSpec:
-        imageUri: gcr.io/exe_project/dockerfiles/train.dockerfile
+        imageUri: europe-west1-docker.pkg.dev/dtumlops-447720/my-container-registry/train_dvc_container
